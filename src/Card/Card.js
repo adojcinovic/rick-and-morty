@@ -1,23 +1,19 @@
 import './Card.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Card = ({ id }) => {
-    const [char, setChar] = useState([])
+    const [char, setChar] = useState()
 
 
     const getChar = (id) => {
         return fetch(`https://rickandmortyapi.com/api/character/${id}`)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                const singleChar = data.name
-                setChar(singleChar)
-            })
+            .then(data => setChar(data))
+
 
     }
 
-    // const bla = getChar(id)
-    !char && getChar()
+    !char && getChar(id)
     console.log(char);
 
     return (
